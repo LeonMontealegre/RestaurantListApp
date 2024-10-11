@@ -17,7 +17,7 @@
         height: $header-height;
     }
     &__content {
-        height: 100%;
+        height: calc(100% - #{$header-height});
     }
     &__footer {
         display: flex;
