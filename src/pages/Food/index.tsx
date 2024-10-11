@@ -122,6 +122,7 @@ export default function FoodPage() {
                     food={food}
                     curUserId={curUserId}
                     size="lg"
+                    includeCategory
                     onFavoriteClick={() => onFoodFavoriteClick(food)} />
             </ListEntryHeader>
 

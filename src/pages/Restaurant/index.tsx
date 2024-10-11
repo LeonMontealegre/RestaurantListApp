@@ -172,6 +172,7 @@ export default function RestaurantPage() {
                             food={food}
                             curUserId={curUserId}
                             link
+                            includeCategory
                             onFavoriteClick={() => onFoodFavoriteClick(food)} />))}
             </div>
         </div>

@@ -5,14 +5,15 @@ export interface FoodListEntryProps {
     food: Food;
     curUserId: UUID;
     restaurantName?: string;
+    includeCategory?: boolean;
     link?: boolean;
     size?: "sm" | "lg";
     onFavoriteClick?: () => void;
 }
-export function FoodListEntry({ food, restaurantName, curUserId, link, size, onFavoriteClick }: FoodListEntryProps) {
+export function FoodListEntry({ food, restaurantName, includeCategory, curUserId, link, size, onFavoriteClick }: FoodListEntryProps) {
     const numRating = food.ratings?.[curUserId];
     const rating = numRating ? ["Bad", "Eh", "Alright", "Pretty Good", "GOOD"][numRating*4] : undefined;
-    const color = numRating ? ["#ff9999", "#cc9999", "#999999", "#99cc99", "#99ff99"][numRating*4] : "#999999";
+    const color = numRating ? ["#ff4545", "#ffa534", "#eebb34", "#97ee29", "#57cc29"][numRating*4] : "#999999";
 
     return (
         <ListEntry
@@ -23,11 +24,18 @@ export function FoodListEntry({ food, restaurantName, curUserId, link, size, onF
             onFavoriteClick={onFavoriteClick}>
             <span style={{
                 backgroundColor: color,
+                fontWeight: "bold",
                 padding: "2px",
                 marginTop: "2px",
             }}>
                 {[restaurantName, rating ?? ""].filter(Boolean).join(" / ")}
             </span>
+            {includeCategory && food.category &&
+                <span style={{
+                    fontSize: (size === "sm" ? "10px" : "12px"),
+                }}>
+                    {food.category}
+                </span>}
         </ListEntry>
     );
 }
