@@ -18,14 +18,14 @@ export function ListView() {
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const onNewRestaurantClick = () => setSearchParams({
-        ...searchParams,
-        "p": "restaurant",
-    });
+    const onNewRestaurantClick = () => {
+        searchParams.set("p", "restaurant");
+        setSearchParams(searchParams);
+    };
     const onNewRestaurantSubmit = (restaurant: Restaurant) => {
         navigate("/", { replace: true });  // Makes it so that going back doesn't open the popup again
         submit({ type: "newRestaurant", restaurant });
-    }
+    };
     const onNewRestaurantCancel = () => {
         navigate(-1);
     };
@@ -37,10 +37,10 @@ export function ListView() {
         submit({ type: "toggleFavorite", kind: "food", id: food.id });
     };
 
-    const onFoodsListClick = () => setSearchParams({
-        ...searchParams,
-        "v": "foods",
-    });
+    const onFoodsListClick = () => {
+        searchParams.set("v", "foods");
+        setSearchParams(searchParams);
+    };
     const onRestaurantsListClick = () => {
         searchParams.delete("v");
         setSearchParams(searchParams);
@@ -48,15 +48,11 @@ export function ListView() {
 
     const updateSearch = (newQuery: string) => {
         const isFirstSearch = (searchQuery == null);
-        if (!newQuery) {
+        if (!newQuery)
             searchParams.delete("q");
-            setSearchParams(searchParams, { replace: true });
-            return;
-        }
-        setSearchParams({
-            ...searchParams,
-            "q": newQuery,
-        }, { replace: !isFirstSearch });
+        else
+            searchParams.set("q", newQuery);
+        setSearchParams(searchParams, { replace: !isFirstSearch });
     };
 
     const showPopup = (searchParams.get("p") === "restaurant");
@@ -64,6 +60,31 @@ export function ListView() {
     const showFoods       = (searchParams.get("v") === "foods");
 
     const searchQuery = searchParams.get("q");
+
+    const restaurantMatchesSearch = (restaurant: Restaurant) => {
+        if (!searchQuery)
+            return true;
+        const query = searchQuery.toLowerCase();
+        return (
+            restaurant.name.toLowerCase().includes(query)
+            || restaurant.locations.some((l) => l.address.toLowerCase().includes(query))
+            || restaurant.cuisines.some((c) => c.toLowerCase().includes(query))
+            || restaurant.notes?.some((n) => n.toLowerCase().includes(query))
+        );
+    };
+    const foodMatchesSearch = (food: Food) => {
+        if (!searchQuery)
+            return true;
+        const query = searchQuery.toLowerCase();
+        return (
+            food.name.toLowerCase().includes(query)
+            || restaurantNamesByFood.get(food.id)?.toLowerCase().includes(query)
+            || food.alternameNames?.some((n) => n.toLowerCase().includes(query))
+            || food.category?.toLowerCase().includes(query)
+            || food.notes?.some((n) => n.toLowerCase().includes(query))
+            || food.specialInstructions?.some((s) => s.toLowerCase().includes(query))
+        );
+    };
 
     return (
         <div className={styles["list-view-container"]}>
@@ -98,6 +119,7 @@ export function ListView() {
             </div>
             <div className={styles["list-view-container__search-results"]}>
                 {showRestaurants && Object.values(restaurants)
+                    .filter(restaurantMatchesSearch)
                     .sort(compareRestaurants(curUserId!))
                     .map((r) => (
                         <RestaurantListEntry key={r.id}
@@ -107,6 +129,7 @@ export function ListView() {
                             onFavoriteClick={() => onRestaurantFavoriteClick(r)} />
                     ))}
                 {showFoods && Object.values(foods)
+                    .filter(foodMatchesSearch)
                     .sort(compareFoods(curUserId!))
                     .map((f) => (
                         <FoodListEntry key={f.id}

@@ -23,10 +23,10 @@ export function UserList() {
             return;
         submit({ type: "changeUser", userId: newUser.id }, { navigate: false });
     };
-    const onNewUserClick = () => setSearchParams({
-        ...searchParams,
-        "p": "user",
-    });
+    const onNewUserClick = () => {
+        searchParams.set("p", "user");
+        setSearchParams(searchParams);
+    };
     const onNewUserSubmit = (user: User) => {
         navigate("/", { replace: true });  // Makes it so that going back doesn't open the popup again
         submit({ type: "newUser", user });
