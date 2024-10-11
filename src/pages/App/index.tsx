@@ -41,7 +41,7 @@ export const Action: ActionFunction = async ({ request, params }) => {
         return new Response();  // Ok
     } else if (action.type === "newRestaurant") {
         await AddNewRestaurant(action.restaurant);
-        return redirect("/");
+        return redirect(`/restaurants/${action.restaurant.id}`);
     } else if (action.type === "toggleFavorite") {
         switch (action.kind) {
         case "food":

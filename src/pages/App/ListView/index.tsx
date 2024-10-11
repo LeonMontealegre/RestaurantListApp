@@ -23,8 +23,7 @@ export function ListView() {
         setSearchParams(searchParams);
     };
     const onNewRestaurantSubmit = (restaurant: Restaurant) => {
-        navigate("/", { replace: true });  // Makes it so that going back doesn't open the popup again
-        submit({ type: "newRestaurant", restaurant });
+        submit({ type: "newRestaurant", restaurant }, { replace: true });  // Makes it so that going back doesn't open the popup again
     };
     const onNewRestaurantCancel = () => {
         navigate(-1);

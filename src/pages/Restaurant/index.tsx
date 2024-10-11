@@ -116,7 +116,7 @@ export default function RestaurantPage() {
 
     const onInitialDeleteClick = () => setAttemptedDelete(true);
     const onConfirmedDeleteClick = () => {
-        submit({ type: "delete", restaurantId: restaurant.id });
+        submit({ type: "delete", restaurantId: restaurant.id }, { replace: true });
         setAttemptedDelete(false);
     };
     const onDeleteCancel = () => setAttemptedDelete(false);
