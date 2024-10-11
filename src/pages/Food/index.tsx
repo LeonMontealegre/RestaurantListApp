@@ -127,6 +127,9 @@ export default function FoodPage() {
             </ListEntryHeader>
 
             <div className={styles["food-page__content"]}>
+                <h2 style={{ border: "none" }}>
+                    Alternate Names: {food.alternameNames?.join(", ") ?? "None"}
+                </h2>
                 <h2>Special Instructions</h2>
                 <div className={styles["food-page__content__special-instructions"]}>{
                     (food.specialInstructions ?? ["None"])

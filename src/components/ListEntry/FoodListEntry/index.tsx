@@ -12,8 +12,8 @@ export interface FoodListEntryProps {
 }
 export function FoodListEntry({ food, restaurantName, includeCategory, curUserId, link, size, onFavoriteClick }: FoodListEntryProps) {
     const numRating = food.ratings?.[curUserId];
-    const rating = numRating ? ["Bad", "Eh", "Alright", "Pretty Good", "GOOD"][numRating*4] : undefined;
-    const color = numRating ? ["#ff4545", "#ffa534", "#eebb34", "#97ee29", "#57cc29"][numRating*4] : "#999999";
+    const rating = numRating !== undefined ? ["Bad", "Eh", "Alright", "Pretty Good", "GOOD"][numRating*4] : undefined;
+    const color = numRating !== undefined ? ["#ff4545", "#ffa534", "#eebb34", "#97ee29", "#57cc29"][numRating*4] : "#999999";
 
     return (
         <ListEntry
