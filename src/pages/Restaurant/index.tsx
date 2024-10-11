@@ -1,7 +1,7 @@
 import type {ActionFunction, LoaderFunction, SubmitOptions} from "react-router-dom";
 import {type Food, type User, type Restaurant, type UUID, type Location, compareFoods, CATEGORIES} from "model/schema";
 
-import {useState} from "react";
+import {Fragment, useState} from "react";
 import {Outlet, redirect, useLoaderData, useNavigate, useSubmit as useSubmitRR} from "react-router-dom";
 
 import {AddNewFood, GetCurUserId, GetFoodsFromRestaurant,
@@ -168,7 +168,7 @@ export default function RestaurantPage() {
                 ))}
                 <h2>Foods</h2>
                 <button onClick={onNewFoodClick}>+ add food</button>
-                {foodsByCategory.map(([category, foods]) => (<>
+                {foodsByCategory.map(([category, foods]) => (<Fragment key={category ?? "Other"}>
                     <h3>{category ? (category + "s") : "Other"}</h3>
                     {foods.map((food) => (
                         <FoodListEntry
@@ -178,7 +178,7 @@ export default function RestaurantPage() {
                             link
                             includeCategory
                             onFavoriteClick={() => onFoodFavoriteClick(food)} />))}
-                </>))}
+                </Fragment>))}
             </div>
         </div>
     </>);
