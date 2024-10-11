@@ -145,6 +145,7 @@ export default function RestaurantPage() {
         <div className={styles["restaurant-page"]}>
             {showPopup &&
                 <NewFoodPopup
+                    curUserId={curUserId}
                     restaurantId={restaurant.id}
                     users={users}
                     onSubmit={onFoodSubmit}

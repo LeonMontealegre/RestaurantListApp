@@ -1,5 +1,6 @@
 import {Food, Restaurant, User, UUID} from "model/schema";
 import {ListEntry} from "..";
+import {Rating} from "components/Rating";
 
 export interface FoodListEntryProps {
     food: Food;
@@ -22,14 +23,9 @@ export function FoodListEntry({ food, restaurantName, includeCategory, curUserId
             link={link ? `/foods/${food.id}` : undefined}
             size={size}
             onFavoriteClick={onFavoriteClick}>
-            <span style={{
-                backgroundColor: color,
-                fontWeight: "bold",
-                padding: "2px",
-                marginTop: "2px",
-            }}>
-                {[restaurantName, rating ?? ""].filter(Boolean).join(" / ")}
-            </span>
+            <Rating
+                rating={numRating}
+                otherInfo={restaurantName} />
             {includeCategory && food.category &&
                 <span style={{
                     fontSize: (size === "sm" ? "10px" : "12px"),

@@ -1,5 +1,6 @@
 import {Restaurant} from "model/schema";
 import {ListEntry} from "..";
+import {Rating} from "components/Rating";
 
 export interface RestaurantListEntryProps {
     restaurant: Restaurant;
@@ -15,12 +16,9 @@ export function RestaurantListEntry({ restaurant, link, size, onFavoriteClick }:
             link={link ? `/restaurants/${restaurant.id}` : undefined}
             size={size}
             onFavoriteClick={onFavoriteClick}>
-            {[
-                restaurant.cuisines.join(", "),
-                restaurant.rating ?? ""
-            ]
-            .filter(Boolean)
-            .join(" / ")}
+            <Rating
+                rating={restaurant.rating}
+                otherInfo={restaurant.cuisines.join(", ")} />
         </ListEntry>
     )
 }

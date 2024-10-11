@@ -8,6 +8,7 @@ import {Price} from "model/schema/Price";
 import {CreationPopup} from "components/CreationPopup";
 
 import styles from "./index.module.scss"
+import {RatingSlider} from "components/RatingSlider";
 
 
 interface PriceSliderProps {
@@ -70,6 +71,10 @@ export function NewRestaurantPopup({ onSubmit, onCancel, ...props }: NewRestaura
         ...restaurant,
         locations: [{ address }],
     });
+    const updateRating = (rating: number) => setRestaurant({
+        ...restaurant,
+        rating,
+    });
     const updatePrice = (newPrice: Price) => setRestaurant({
         ...restaurant,
         price: newPrice,
@@ -104,6 +109,12 @@ export function NewRestaurantPopup({ onSubmit, onCancel, ...props }: NewRestaura
             onChange={(ev) => updateLocation(ev.target.value)} />
 
         <div>
+            <h1>Rating</h1>
+            <RatingSlider value={restaurant?.rating ?? 0.5}
+                onChange={updateRating} />
+        </div>
+
+        <div>
             <h1>Cuisines</h1>
             <div className={styles["restaurant-cuisines__list"]}>
                 {(restaurant.cuisines ?? []).map((cuisine, i) => (
@@ -125,10 +136,8 @@ export function NewRestaurantPopup({ onSubmit, onCancel, ...props }: NewRestaura
         </div>
 
         <div>
-            <h1>
-                Price
-            </h1>
-            <PriceSlider value={restaurant.price ?? 0} onChange={updatePrice} />
+            <h1>Price</h1>
+            <PriceSlider value={restaurant.price ?? 0.5} onChange={updatePrice} />
         </div>
 
         <textarea placeholder="notes"

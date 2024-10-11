@@ -15,12 +15,17 @@ type NewFoodPopupProps = {
     onCancel: () => void;
 } & ({
     editMode?: false;
+    curUserId: UUID;
 } | {
     editMode: true;
     initialFood: Food;
 })
 export function NewFoodPopup({ restaurantId, users, onCancel, onSubmit, ...props }: NewFoodPopupProps) {
-    const initialState = props.editMode ? props.initialFood : {};
+    const initialState = props.editMode ? props.initialFood : {
+        ratings: {
+            [props.curUserId]: 0.5,
+        },
+    };
     const [food, setFood] = useState<Partial<Omit<Food, "restaurantId" | "id">>>(initialState);
 
     const usersWithoutRating = users.filter((u) => (food.ratings?.[u.id] === undefined));
@@ -69,7 +74,7 @@ export function NewFoodPopup({ restaurantId, users, onCancel, onSubmit, ...props
         ...food,
         ratings: {
             ...(food.ratings ?? {}),
-            [userId]: 0,
+            [userId]: 0.5,
         },
     });
     const updateSpecialInstruction = (instruction: string, i: number) => setFood({
