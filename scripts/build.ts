@@ -14,6 +14,6 @@ process.env.NODE_ENV = "production";
     rmSync("build/site", { recursive: true, force: true });
 
     console.log();
-    await startWebpack(".", "production", true);
+    await startWebpack(".", "production", true, "/RestaurantListApp/");
     console.log(`${chalk.greenBright("Done!")}`);
 })();

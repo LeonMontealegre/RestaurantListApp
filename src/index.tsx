@@ -36,7 +36,7 @@ const router = createBrowserRouter([
                 action: RestaurantAction,
                 children: [
                     {
-                        path: "/restaurants/:restaurantId/edit",
+                        path: "edit",
                         element: <EditRestaurantPage />,
                         loader: EditRestaurantLoader,
                         action: EditRestaurantAction,
@@ -50,7 +50,7 @@ const router = createBrowserRouter([
                 action: FoodAction,
                 children: [
                     {
-                        path: "/foods/:foodId/edit",
+                        path: "edit",
                         element: <EditFoodPage />,
                         loader: EditFoodLoader,
                         action: EditFoodAction,

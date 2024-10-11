@@ -7,6 +7,7 @@
     "test": "node ./build/scripts/test.js",
     "postinstall": "tsc --project ./scripts/tsconfig.json && copyfiles ./scripts/utils/browser/openChrome.applescript ./build"
   },
+  "homepage": "https://leonmontealegre.github.io/RestaurantListApp",
   "type": "module",
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",

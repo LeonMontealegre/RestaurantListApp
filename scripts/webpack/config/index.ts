@@ -21,7 +21,7 @@ import type {Configuration} from "webpack";
  * @returns      The webpack configuration.
  */
 export default (config: Config): Configuration => {
-    const { entry, isDev, isProd, mode, target, buildDir, rootDir, stats, env, tsOnly, outputFile } = config;
+    const { entry, isDev, isProd, mode, target, publicRoot, buildDir, rootDir, stats, env, tsOnly, outputFile } = config;
 
     const swSrc = `${rootDir}/src/service-worker.ts`;
 
@@ -33,7 +33,7 @@ export default (config: Config): Configuration => {
 
             output: {
                 path: buildDir,
-                publicPath: "/",
+                publicPath: publicRoot,
 
                 // Extract the JS to /static/js/
                 filename:      (isProd ? `${outputName}.js`       : undefined),

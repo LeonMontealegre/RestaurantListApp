@@ -5,6 +5,7 @@ export type Config = {
     isProd: boolean;
     isDev:  boolean;
 
+    publicRoot: string;
     publicPath: string;
     rootDir:    string;
     buildDir:   string;

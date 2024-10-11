@@ -16,12 +16,12 @@ export default async (
     dir: string,
     mode: "development" | "production",
     open: boolean,
+    publicRoot: string = "/",
     forcePort?: number,
 ) => {
-    const publicRoot = "/";
     const rootPath = process.cwd();
     const dirPath = path.resolve(rootPath, dir);
-    const buildDir = path.resolve(rootPath, "build/site");
+    const buildDir = path.resolve(rootPath, "build/site", "." + publicRoot);
 
     const compiler = webpack(config({
         mode,
@@ -30,6 +30,7 @@ export default async (
 
         target: (mode === "production" ? "browserslist" : "web"),
 
+        publicRoot,
         rootDir: dirPath,
 
         // Needs to be relative paths from root
@@ -127,39 +128,5 @@ export default async (
                     resolve(result);
             });
         });
-
-        // // Build server-worker
-        // const compiler2 = webpack(config({
-        //     mode,
-        //     isProd: true,
-        //     isDev:  false,
-
-        //     target: "browserslist",
-
-        //     rootDir: dirPath,
-
-        //     // Needs to be relative paths from root
-        //     entry:      `./${dir}/src/service-worker.ts`,
-        //     publicPath: `./${dir}/public`,
-
-        //     // Needs to be absolute path
-        //     buildDir,
-
-        //     stats: "none",
-
-        //     env: getEnv(dirPath, publicRoot),
-
-        //     tsOnly: true,
-        //     outputFile: "service-worker",
-        // }));
-
-        // await new Promise((resolve, reject) => {
-        //     compiler2.run((err, result) => {
-        //         if (err || result!.compilation.errors.length > 0)
-        //             reject({ err, errors: result!.compilation.errors });
-        //         else
-        //             resolve(result);
-        //     });
-        // });
     }
 };
