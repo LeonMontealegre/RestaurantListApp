@@ -1,0 +1,77 @@
+@import "utils/styles.module.scss";
+
+
+.sm {
+    font-size: 16px;
+}
+.lg {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.list-entry {
+    display: flex;
+    flex-direction: row;
+    height: $list-entry-height;
+
+    border-bottom: 1px solid black;
+
+    &:first-child {
+        border-top: 1px solid black;
+    }
+
+    &__left {
+        display: flex;
+        width: $list-entry-height;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        & > span {
+            height: 60%;
+            & > img {
+                height: 100%;
+            }
+        }
+    }
+    &__content {
+        display: flex;
+        flex-direction: column;
+        width: calc(100% - #{$list-entry-height});
+        height: 100%;
+        justify-content: center;
+
+        box-sizing: border-box;
+
+        padding: 10px 10px;
+
+        color: black;
+
+        &__header {
+            width: 100%;
+
+            & > a {
+                display: block;
+
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+
+                text-decoration: none;
+                color: black;
+            }
+        }
+        &__info {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            justify-content: space-between;
+
+            font-weight: lighter;
+            font-size: small;
+        }
+    }
+}

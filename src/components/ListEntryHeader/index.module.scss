@@ -1,0 +1,54 @@
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    & > div {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
+
+        // Override some styles on the ListEntry
+        & > div {
+            border: none !important;
+            & > div > span {
+                height: 70%;
+            }
+        }
+    }
+    &__back-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        margin: 0 15px 0 10px;
+
+        & img {
+            width: 40px;
+            height: 40px;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+    &__right {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        & img {
+            width: 40px;
+            height: 40px;
+            margin: 0 5px;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}

@@ -1,0 +1,70 @@
+@import "utils/styles.module.scss";
+
+
+.restaurant-cuisines {
+    &__list {
+        margin: 10px 0;
+
+        & > span {
+            display: inline-block;
+            padding: 10px 10px 10px 20px;
+
+            margin-right: 10px;
+
+            border: 1px solid black;
+            border-radius: 15px;
+
+            background-color: #ddd;
+
+            & > span {
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                width: 30px;
+                height: 30px;
+                margin-left: 5px;
+                color: $red-col;
+                border-radius: 15px;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+.restaurant-pricing {
+    &__slider {
+        & > input {
+            width: 95%;
+            margin: 0;
+        }
+        & > datalist {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 95%;
+
+            & > option {
+                position: relative;
+                &:after {
+                    content: attr(data-text);
+                    display: block;
+                    position: absolute;
+                    transform: translate(calc(-50% + 3px), 0);
+                }
+                &:first-child {
+                    &:after {
+                        transform: translate(0, 0);
+                    }
+                }
+                &:last-child {
+                    &:after {
+                        transform: translate(-100%, 0);
+                    }
+                }
+            }
+        }
+    }
+}

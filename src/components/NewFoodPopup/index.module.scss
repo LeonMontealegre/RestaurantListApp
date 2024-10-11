@@ -1,0 +1,81 @@
+
+.food-rating {
+    &__slider {
+        & > input {
+            width: 95%;
+            margin: 0;
+        }
+        & > datalist {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 95%;
+
+            & > option {
+                position: relative;
+                &:after {
+                    content: attr(data-text);
+                    display: block;
+                    position: absolute;
+                    transform: translate(calc(-50% + 3px), 0);
+                }
+                &:first-child {
+                    &:after {
+                        transform: translate(0, 0);
+                    }
+                }
+                &:last-child {
+                    &:after {
+                        transform: translate(-100%, 0);
+                    }
+                }
+            }
+        }
+    }
+
+    & > button {
+        margin: 20px 0 20px 0;
+        padding: 10px 20px;
+
+        border: 1px solid black;
+        border-radius: 15px;
+
+        font-size: 20px;
+    }
+
+    & > select {
+        margin: 20px 0 10px 0;
+        height: 40px;
+
+        border: 1px solid black;
+
+        font-size: 20px;
+        padding: 0 10px;
+    }
+}
+
+.food-special-instructions {
+    & > div {
+        width: 100%;
+        margin: 10px 0 10px 0;
+
+        & > input {
+            width: 80%;
+            height: 60px;
+
+            border: 1px solid black;
+            box-sizing: border-box;
+
+            font-size: 40px;
+            padding: 0 10px;
+        }
+        & > span {
+            display: inline-block;
+            width: calc(20% - 20px);
+            margin-left: 20px;
+
+            font-size: 40px;
+            text-align: left;
+        }
+    }
+}

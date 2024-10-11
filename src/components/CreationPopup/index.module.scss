@@ -1,0 +1,91 @@
+@import "utils/styles.module.scss";
+
+
+.creation-popup {
+    &__header {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        padding: 0 10px;
+
+        box-sizing: border-box;
+
+        & > h1 {
+            font-size: 40px;
+            font-weight: normal;
+            margin-bottom: 0;
+        }
+    }
+    &__content {
+        flex: 1 1 auto;
+        overflow-y: auto;
+        min-height: 0;
+
+        padding: 10px;
+
+        background-color: $bg-color;
+
+        & > * {
+            width: 100%;
+            margin: 10px 0;
+        }
+        & > input, select, textarea {
+            height: 60px;
+
+            box-sizing: border-box;
+
+            border: 1px solid black;
+
+            font-size: 40px;
+            padding: 0 10px;
+        }
+        & select {
+            height: 40px;
+            font-size: 20px;
+            padding: 0;
+        }
+        & > textarea {
+            height: 120px;
+        }
+        & > div {
+            & > h1 {
+                margin-top: 0;
+                margin-bottom: 5px;
+                font-size: 40px;
+                font-weight: normal;
+            }
+            & > div {
+                margin-left: 5%;
+                width: 95%;
+            }
+        }
+    }
+    &__footer {
+        display: flex;
+        flex-direction: row;
+        flex-shrink: 0;
+        justify-content: space-evenly;
+        align-items: center;
+
+        min-height: $footer-height;
+        height: $footer-height;
+
+        & > button {
+            width: 100%;
+            height: 100%;
+
+            font-size: 20px;
+
+            border-top: 1px solid black;
+        }
+        &__cancel {
+            background-color: $bg-color;
+        }
+        &__done {
+            background-color: $green-col;
+        }
+    }
+}
