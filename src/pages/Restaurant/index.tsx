@@ -1,5 +1,5 @@
 import type {ActionFunction, LoaderFunction, SubmitOptions} from "react-router-dom";
-import type {Food, User, Restaurant, UUID, Location} from "model/schema";
+import {type Food, type User, type Restaurant, type UUID, type Location, compareFoods} from "model/schema";
 
 import {useState} from "react";
 import {Outlet, redirect, useLoaderData, useNavigate, useSubmit as useSubmitRR} from "react-router-dom";
@@ -164,13 +164,15 @@ export default function RestaurantPage() {
                 ))}
                 <h2>Foods</h2>
                 <button onClick={onNewFoodClick}>+ add food</button>
-                {foods.map((food) => (
-                    <FoodListEntry
-                        key={food.id}
-                        food={food}
-                        curUserId={curUserId}
-                        link
-                        onFavoriteClick={() => onFoodFavoriteClick(food)} />))}
+                {foods
+                    .sort(compareFoods(curUserId))
+                    .map((food) => (
+                        <FoodListEntry
+                            key={food.id}
+                            food={food}
+                            curUserId={curUserId}
+                            link
+                            onFavoriteClick={() => onFoodFavoriteClick(food)} />))}
             </div>
         </div>
     </>);

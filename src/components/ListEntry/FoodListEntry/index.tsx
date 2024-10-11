@@ -12,6 +12,7 @@ export interface FoodListEntryProps {
 export function FoodListEntry({ food, restaurantName, curUserId, link, size, onFavoriteClick }: FoodListEntryProps) {
     const numRating = food.ratings?.[curUserId];
     const rating = numRating ? ["Bad", "Eh", "Alright", "Pretty Good", "GOOD"][numRating*4] : undefined;
+    const color = numRating ? ["#ff9999", "#cc9999", "#999999", "#99cc99", "#99ff99"][numRating*4] : "#999999";
 
     return (
         <ListEntry
@@ -20,7 +21,13 @@ export function FoodListEntry({ food, restaurantName, curUserId, link, size, onF
             link={link ? `/foods/${food.id}` : undefined}
             size={size}
             onFavoriteClick={onFavoriteClick}>
-            <span>{[restaurantName, rating ?? ""].filter(Boolean).join(" / ")}</span>
+            <span style={{
+                backgroundColor: color,
+                padding: "2px",
+                marginTop: "2px",
+            }}>
+                {[restaurantName, rating ?? ""].filter(Boolean).join(" / ")}
+            </span>
         </ListEntry>
     );
 }

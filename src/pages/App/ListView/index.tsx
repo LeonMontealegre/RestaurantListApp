@@ -1,4 +1,4 @@
-import type {Food, Restaurant} from "model/schema";
+import {compareFoods, compareRestaurants, type Food, type Restaurant} from "model/schema";
 
 import {Link, Outlet, useNavigate, useSearchParams} from "react-router-dom";
 
@@ -98,13 +98,7 @@ export function ListView() {
             </div>
             <div className={styles["list-view-container__search-results"]}>
                 {showRestaurants && Object.values(restaurants)
-                    .sort((a, b) => {
-                        if (a.isFavorite && !b.isFavorite)
-                            return -1;
-                        if (!a.isFavorite && b.isFavorite)
-                            return +1;
-                        return a.name.localeCompare(b.name);
-                    })
+                    .sort(compareRestaurants(curUserId!))
                     .map((r) => (
                         <RestaurantListEntry key={r.id}
                             restaurant={r}
@@ -113,13 +107,7 @@ export function ListView() {
                             onFavoriteClick={() => onRestaurantFavoriteClick(r)} />
                     ))}
                 {showFoods && Object.values(foods)
-                    .sort((a, b) => {
-                        if (a.isFavorite && !b.isFavorite)
-                            return -1;
-                        if (!a.isFavorite && b.isFavorite)
-                            return +1;
-                        return a.name.localeCompare(b.name);
-                    })
+                    .sort(compareFoods(curUserId!))
                     .map((f) => (
                         <FoodListEntry key={f.id}
                             curUserId={curUserId!}
