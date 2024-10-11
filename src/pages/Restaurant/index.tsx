@@ -132,6 +132,8 @@ export default function RestaurantPage() {
     foods.sort(compareFoods(curUserId));
     const foodsByCategory = [...CATEGORIES, undefined].map((c) => [c, foods.filter((f) => (f.category === c))] as const);
 
+    const priceStr = restaurant.price ? ["$", "$$", "$$$", "$$$$", "$$$$$"][restaurant.price * 4] : "Unset";
+
     return (<>
         <Outlet />
 
@@ -156,6 +158,14 @@ export default function RestaurantPage() {
             </ListEntryHeader>
 
             <div className={styles["restaurant-page__content"]}>
+                <div>
+                    <h2>Price: {priceStr}</h2>
+                </div>
+                <h2>Notes</h2>
+                <div className={styles["restaurant-page__content__notes"]}>{
+                    (restaurant.notes ?? ["None"])
+                        .map((line, i) => (<div key={i}>{line}</div>))
+                }</div>
                 <h2>Locations</h2>
                 <button onClick={onNewLocationClick}>+ new location</button>
                 {restaurant.locations.map((location) => (

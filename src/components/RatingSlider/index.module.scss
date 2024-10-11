@@ -1,0 +1,57 @@
+
+.rating-slider {
+    & > input {
+        width: 95%;
+        margin: 0;
+    }
+    & > datalist {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 95%;
+
+        & > option {
+            position: relative;
+
+
+            &:after {
+                content: attr(data-text);
+                display: inline-block;
+                position: absolute;
+                transform: translate(calc(-50% + 3px), 0);
+
+                @media (max-width: 530px) {
+                    text-wrap: wrap;
+                    white-space-collapse: break-spaces;
+                }
+            }
+            &:first-child {
+                &:after {
+                    transform: translate(0, 0);
+                }
+            }
+            &:last-child {
+                &:after {
+                    transform: translate(-100%, 0);
+                }
+            }
+            &:nth-child(3) {
+                &:after {
+                    @media (max-width: 350px) {
+                        transform: translate(calc(-50% - 5px), 0);
+                    }
+                }
+            }
+            &:nth-child(4) {
+                &:after {
+                    @media (max-width: 400px) {
+                        transform: translate(calc(-50% - 5px), 0);
+                    }
+                    @media (max-width: 350px) {
+                        transform: translate(calc(-50% - 10px), 0);
+                    }
+                }
+            }
+        }
+    }
+}
