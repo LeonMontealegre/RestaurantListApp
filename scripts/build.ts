@@ -1,6 +1,6 @@
 import {rmSync} from "fs";
 import chalk from "chalk";
-import startWebpack from "./webpack/index";
+import startWebpack from "./webpack/index.js";
 
 
 // Do this as the first thing so that any code reading it knows the right env.

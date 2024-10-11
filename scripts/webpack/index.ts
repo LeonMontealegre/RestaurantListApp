@@ -5,11 +5,11 @@ import chalk from "chalk";
 import webpack from "webpack";
 import WebpackDevServer from "webpack-dev-server";
 
-import openBrowser from "../utils/browser/openBrowser";
-import choosePort from "../utils/choosePort";
-import copyDir from "../utils/copyDir";
-import getEnv from "../utils/env";
-import config from "./config";
+import openBrowser from "../utils/browser/openBrowser.js";
+import choosePort from "../utils/choosePort.js";
+import copyDir from "../utils/copyDir.js";
+import getEnv from "../utils/env.js";
+import config from "./config/index.js";
 
 
 export default async (
