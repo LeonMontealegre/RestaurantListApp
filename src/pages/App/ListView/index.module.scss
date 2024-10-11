@@ -98,7 +98,7 @@
     &__new-restaurant-btn {
         $size: 80px;
 
-        position: absolute;
+        position: fixed;
         right: 10px;
         bottom: 10px;
 
@@ -108,6 +108,8 @@
 
         width: $size;
         height: $size;
+
+        background-color: $bg-color;
 
         border-radius: math.div($size, 2);
         border: 2px solid black;

@@ -97,22 +97,38 @@ export function ListView() {
                 </div>
             </div>
             <div className={styles["list-view-container__search-results"]}>
-                {showRestaurants && Object.values(restaurants).map((r) => (
-                    <RestaurantListEntry key={r.id}
-                        restaurant={r}
-                        size="lg"
-                        link
-                        onFavoriteClick={() => onRestaurantFavoriteClick(r)} />
-                ))}
-                {showFoods && Object.values(foods).map((f) => (
-                    <FoodListEntry key={f.id}
-                        curUserId={curUserId!}
-                        food={f}
-                        restaurantName={restaurantNamesByFood.get(f.id)!}
-                        size="lg"
-                        link
-                        onFavoriteClick={() => onFoodFavoriteClick(f)} />
-                ))}
+                {showRestaurants && Object.values(restaurants)
+                    .sort((a, b) => {
+                        if (a.isFavorite && !b.isFavorite)
+                            return -1;
+                        if (!a.isFavorite && b.isFavorite)
+                            return +1;
+                        return a.name.localeCompare(b.name);
+                    })
+                    .map((r) => (
+                        <RestaurantListEntry key={r.id}
+                            restaurant={r}
+                            size="lg"
+                            link
+                            onFavoriteClick={() => onRestaurantFavoriteClick(r)} />
+                    ))}
+                {showFoods && Object.values(foods)
+                    .sort((a, b) => {
+                        if (a.isFavorite && !b.isFavorite)
+                            return -1;
+                        if (!a.isFavorite && b.isFavorite)
+                            return +1;
+                        return a.name.localeCompare(b.name);
+                    })
+                    .map((f) => (
+                        <FoodListEntry key={f.id}
+                            curUserId={curUserId!}
+                            food={f}
+                            restaurantName={restaurantNamesByFood.get(f.id)!}
+                            size="lg"
+                            link
+                            onFavoriteClick={() => onFoodFavoriteClick(f)} />
+                    ))}
 
                 <button className={styles["list-view-container__new-restaurant-btn"]}
                     onClick={onNewRestaurantClick}>
