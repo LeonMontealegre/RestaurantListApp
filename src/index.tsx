@@ -1,6 +1,6 @@
 import React from "react";
 import {createRoot} from "react-dom/client";
-import {createBrowserRouter, RouterProvider} from "react-router-dom"
+import {createHashRouter, RouterProvider} from "react-router-dom"
 
 
 import App, {Action as AppAction, Loader as AppLoader} from "pages/App";
@@ -15,7 +15,7 @@ import * as serviceWorkerRegistration from "./serverWorkerRegistration";
 import "./index.scss";
 
 
-const router = createBrowserRouter([
+const router = createHashRouter([
     {
         path: "/",
         element: <App />,
