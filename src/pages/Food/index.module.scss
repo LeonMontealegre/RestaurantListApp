@@ -52,9 +52,11 @@
             border-bottom: 1px solid black;
         }
 
-        &__notes {
+        &__special-instructions, &__notes {
             margin-top: 10px;
             margin-left: 10px;
+
+            font-size: 25px;
         }
 
         &-none {

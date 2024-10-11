@@ -126,6 +126,11 @@ export default function FoodPage() {
             </ListEntryHeader>
 
             <div className={styles["food-page__content"]}>
+                <h2>Special Instructions</h2>
+                <div className={styles["food-page__content__special-instructions"]}>{
+                    (food.specialInstructions ?? ["None"])
+                        .map((line, i) => (<div key={i}>- {line}</div>))
+                }</div>
                 <h2>Notes</h2>
                 <div className={styles["food-page__content__notes"]}>{
                     (food.notes ?? ["None"])
