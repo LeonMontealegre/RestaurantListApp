@@ -71,11 +71,10 @@ export default function App() {
             <div className={styles["app-container__content"]}>
                 <Outlet />
             </div>
-            <div className={styles["app-container__footer"]}>
-                {/* Footer */}
+            {/* <div className={styles["app-container__footer"]}>
                 <div><Link to="/">List</Link></div>
                 <div><Link to="/">Map</Link></div>
-            </div>
+            </div> */}
         </div>
     );
 }
