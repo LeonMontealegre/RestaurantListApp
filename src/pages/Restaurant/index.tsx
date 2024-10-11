@@ -1,5 +1,5 @@
 import type {ActionFunction, LoaderFunction, SubmitOptions} from "react-router-dom";
-import {type Food, type User, type Restaurant, type UUID, type Location, compareFoods} from "model/schema";
+import {type Food, type User, type Restaurant, type UUID, type Location, compareFoods, CATEGORIES} from "model/schema";
 
 import {useState} from "react";
 import {Outlet, redirect, useLoaderData, useNavigate, useSubmit as useSubmitRR} from "react-router-dom";
@@ -128,6 +128,10 @@ export default function RestaurantPage() {
     };
     const onFoodClose = () => setShowPopup(false);
 
+    // Sort foods
+    foods.sort(compareFoods(curUserId));
+    const foodsByCategory = [...CATEGORIES, undefined].map((c) => [c, foods.filter((f) => (f.category === c))] as const);
+
     return (<>
         <Outlet />
 
@@ -164,9 +168,9 @@ export default function RestaurantPage() {
                 ))}
                 <h2>Foods</h2>
                 <button onClick={onNewFoodClick}>+ add food</button>
-                {foods
-                    .sort(compareFoods(curUserId))
-                    .map((food) => (
+                {foodsByCategory.map(([category, foods]) => (<>
+                    <h3>{category ? (category + "s") : "Other"}</h3>
+                    {foods.map((food) => (
                         <FoodListEntry
                             key={food.id}
                             food={food}
@@ -174,6 +178,7 @@ export default function RestaurantPage() {
                             link
                             includeCategory
                             onFavoriteClick={() => onFoodFavoriteClick(food)} />))}
+                </>))}
             </div>
         </div>
     </>);
