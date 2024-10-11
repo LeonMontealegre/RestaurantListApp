@@ -38,6 +38,10 @@ class Table<T extends Record<string, any>> {
                 [k, (await this.table.getItem(k))! as T[keyof T]] as const))
         return new Map(entries);
     }
+
+    public async clear(): Promise<void> {
+        await this.table.clear();
+    }
 }
 
 
@@ -59,6 +63,38 @@ export async function GetRestaurant(id: UUID): Promise<Restaurant | undefined> {
 }
 export async function GetFood(id: UUID): Promise<Food | undefined> {
     return await foodsTable.getItem(id);
+}
+
+export async function ClearAllData(): Promise<void> {
+    configTable.clear();
+    usersTable.clear();
+    restaurantsTable.clear();
+    foodsTable.clear();
+    foodIdsByRestaurant.clear();
+}
+
+export async function LoadData(foods: Food[], restaurants: Restaurant[], users: User[]): Promise<void> {
+    // Try and combine users with same name
+    const curUsers = await GetUsers();
+    for (const user of users) {
+        const existingUser = curUsers.find((u) => (u.name === user.name));
+        if (!existingUser) {
+            await usersTable.setItem(user.id, user);
+            continue;
+        }
+        // If already have a user with the name, don't add and replace all ratings with our user
+        foods.forEach((food) => {
+            if (!food.ratings)
+                return;
+            if (user.id in food.ratings) {
+                const { [user.id]: rating, ...otherRatings } = food.ratings;
+                food.ratings[existingUser.id] = rating;
+            }
+        });
+    }
+
+    await Promise.all(restaurants.map(AddNewRestaurant));
+    await Promise.all(foods.map(AddNewFood));
 }
 
 export async function GetRestaurants(): Promise<Restaurant[]> {

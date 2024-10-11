@@ -1,6 +1,6 @@
 import type {Food, Restaurant} from "model/schema";
 
-import {Outlet, useNavigate, useSearchParams} from "react-router-dom";
+import {Link, Outlet, useNavigate, useSearchParams} from "react-router-dom";
 
 import {NewRestaurantPopup}           from "components/NewRestaurantPopup";
 import {RestaurantListEntry}          from "components/ListEntry/RestaurantListEntry";
@@ -82,7 +82,9 @@ export function ListView() {
                         value={searchQuery ?? ""}
                         onChange={(ev) => updateSearch(ev.target.value)} />
                     <div className={styles["list-view-container__header__search-bar__settings"]}>
-                        <img src={settings} />
+                        <Link to="/settings">
+                            <img src={settings} />
+                        </Link>
                     </div>
                 </div>
                 <div className={styles["list-view-container__header__btns"]}>

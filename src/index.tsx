@@ -9,6 +9,7 @@ import RestaurantPage, {Loader as RestaurantLoader, Action as RestaurantAction} 
 import EditRestaurantPage, {Loader as EditRestaurantLoader, Action as EditRestaurantAction} from "pages/Restaurant/Edit";
 import FoodPage, {Loader as FoodLoader, Action as FoodAction} from "pages/Food";
 import EditFoodPage, {Loader as EditFoodLoader, Action as EditFoodAction} from "pages/Food/Edit";
+import SettingsPage, {Action as SettingsAction} from "pages/Settings";
 
 import * as serviceWorkerRegistration from "./serverWorkerRegistration";
 
@@ -56,6 +57,11 @@ const router = createHashRouter([
                         action: EditFoodAction,
                     },
                 ],
+            },
+            {
+                path: "settings",
+                element: <SettingsPage />,
+                action: SettingsAction,
             }
         ]
     },

@@ -3,7 +3,7 @@ import {Link, useNavigate} from "react-router-dom";
 import styles     from "./index.module.scss";
 import deleteIcon from "./delete.svg";
 import editIcon   from "./edit.svg";
-import backIcon   from "./back_arrow.svg";
+import {BackButton} from "components/BackButton";
 
 
 interface ListEntryHeader {
@@ -16,10 +16,7 @@ export function ListEntryHeader({ children, onDeleteClick }: ListEntryHeader) {
     return (
         <div className={styles["header"]}>
             <div>
-                <div className={styles["header__back-btn"]}>
-                    <img src={backIcon}
-                            onClick={() => navigate(-1)} />
-                </div>
+                <BackButton />
                 {children}
             </div>
             <div className={styles["header__right"]}>
