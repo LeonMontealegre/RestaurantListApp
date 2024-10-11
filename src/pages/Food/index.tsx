@@ -11,7 +11,6 @@ import {FoodListEntry} from "components/ListEntry/FoodListEntry";
 import {RestaurantListEntry} from "components/ListEntry/RestaurantListEntry";
 
 import styles     from "./index.module.scss";
-import deleteIcon from "./delete.svg";
 import {ListEntryHeader} from "components/ListEntryHeader";
 
 
@@ -127,6 +126,11 @@ export default function FoodPage() {
             </ListEntryHeader>
 
             <div className={styles["food-page__content"]}>
+                <h2>Notes</h2>
+                <div className={styles["food-page__content__notes"]}>{
+                    (food.notes ?? ["None"])
+                        .map((line, i) => (<div key={i}>{line}</div>))
+                }</div>
                 <h2>From</h2>
                 <RestaurantListEntry
                     restaurant={restaurant}
