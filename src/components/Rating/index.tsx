@@ -4,7 +4,7 @@ interface RatingProps {
     otherInfo?: string;
 }
 export function Rating({ rating, otherInfo }: RatingProps) {
-    if (!rating && !otherInfo)
+    if (rating === undefined && otherInfo === undefined)
         return null;
 
     const strRating = rating !== undefined
