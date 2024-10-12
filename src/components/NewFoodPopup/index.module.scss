@@ -33,6 +33,17 @@
         }
     }
 
+    & > h2 {
+        & > span {
+            color: red;
+            margin-left: 20px;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
     & > button {
         margin: 20px 0 20px 0;
         padding: 10px 20px;

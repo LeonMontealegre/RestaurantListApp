@@ -77,6 +77,13 @@ export function NewFoodPopup({ restaurantId, users, onCancel, onSubmit, ...props
             [userId]: 0.5,
         },
     });
+    const removeRating = (userId: UUID) => {
+        const { [userId]: _, ...ratings } = food.ratings ?? {};
+        setFood({
+            ...food,
+            ratings,
+        });
+    };
     const updateSpecialInstruction = (instruction: string, i: number) => setFood({
         ...food,
         specialInstructions: [
@@ -119,7 +126,10 @@ export function NewFoodPopup({ restaurantId, users, onCancel, onSubmit, ...props
             <h1>Ratings</h1>
             <div className={styles["food-rating"]}>
                 {Object.entries(food.ratings ?? {}).map(([userId, rating]) => (<Fragment key={userId}>
-                    <h2>{users.find((u) => (u.id === userId))!.name}</h2>
+                    <h2>
+                        {users.find((u) => (u.id === userId))!.name}
+                        <span onClick={() => removeRating(userId)}>x</span>
+                    </h2>
                     <RatingSlider value={rating}
                         onChange={(rating) => updateRating(userId, rating)} />
                 </Fragment>))}

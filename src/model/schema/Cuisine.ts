@@ -16,6 +16,8 @@ export const CUISINES = [
     "Pizza",
     "Asian",
     "Sandwiches",
+    "Diner",
+    "Breakfast",
 ] as const;
 
 export type Cuisine = typeof CUISINES[number];

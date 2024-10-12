@@ -5,6 +5,7 @@ export const CATEGORIES = [
     "Side",
     "Drink",
     "Combo",
+    "Dessert",
 ] as const;
 
 export type Category = typeof CATEGORIES[number];
