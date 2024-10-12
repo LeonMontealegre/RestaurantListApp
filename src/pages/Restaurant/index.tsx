@@ -179,17 +179,19 @@ export default function RestaurantPage() {
                 ))}
                 <h2>Foods</h2>
                 <button onClick={onNewFoodClick}>+ add food</button>
-                {foodsByCategory.map(([category, foods]) => (<Fragment key={category ?? "Other"}>
-                    <h3>{category ? (category + "s") : "Other"}</h3>
-                    {foods.map((food) => (
-                        <FoodListEntry
-                            key={food.id}
-                            food={food}
-                            curUserId={curUserId}
-                            link
-                            includeCategory
-                            onFavoriteClick={() => onFoodFavoriteClick(food)} />))}
-                </Fragment>))}
+                {foodsByCategory
+                    .filter(([_, foods]) => (foods.length > 0))
+                    .map(([category, foods]) => (<Fragment key={category ?? "Other"}>
+                        <h3>{category ? (category + "s") : "Other"}</h3>
+                        {foods.map((food) => (
+                            <FoodListEntry
+                                key={food.id}
+                                food={food}
+                                curUserId={curUserId}
+                                link
+                                includeCategory
+                                onFavoriteClick={() => onFoodFavoriteClick(food)} />))}
+                    </Fragment>))}
             </div>
         </div>
     </>);
