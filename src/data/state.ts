@@ -146,6 +146,10 @@ export async function RemoveRestaurant(restaurantId: UUID): Promise<void> {
 }
 
 export async function RemoveFood(foodId: UUID): Promise<void> {
+    const food = await foodsTable.getItem(foodId);
+    await foodIdsByRestaurant.setItem(food!.restaurantId,
+        (await foodIdsByRestaurant.getItem(food!.restaurantId))!
+            .filter((id) => (id !== foodId)));
     await foodsTable.removeItem(foodId);
 }
 
